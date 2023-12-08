@@ -5,4 +5,7 @@ export interface Food {
     price: number
     description: string
     imgUrl: string
+    cookTime: string
+    isFavorite: boolean
+    stars: number
 }
