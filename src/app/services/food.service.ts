@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, from, retry, tap, throwError } from 'rxjs';
+import { BehaviorSubject, EMPTY, catchError, from, of, retry, tap, throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Food } from '../model/food';
 import { storageService } from './async-storage-service';
@@ -27,7 +27,10 @@ export class FoodService {
   getFoodById(foodId: string) {
     return from(storageService.getFoodById(foodId))
       .pipe(
-        catchError(this._handleError)
+        catchError((err: HttpErrorResponse) => {
+          console.log('Something went wrong: FoodService|getFoodById', err)
+          return of(null) // return EMPTY
+        })
       )
   }
 

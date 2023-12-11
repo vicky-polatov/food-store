@@ -7,6 +7,7 @@ import { FoodIndexComponent } from './views/food-index/food-index.component';
 import { FoodListComponent } from './cmps/food-list/food-list.component';
 import { FoodPreviewComponent } from './cmps/food-preview/food-preview.component';
 import { HeaderComponent } from './cmps/header/header.component';
+import { FoodDetailsComponent } from './views/food-details/food-details.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { HeaderComponent } from './cmps/header/header.component';
     FoodIndexComponent,
     FoodListComponent,
     FoodPreviewComponent,
-    HeaderComponent
+    HeaderComponent,
+    FoodDetailsComponent
   ],
   imports: [
     BrowserModule,
