@@ -1,5 +1,5 @@
 <a routerLink="/food-store">Back to Store</a>
-<div class="inner-page-container">
+<div *ngIf="food$ | async as food" class="inner-page-container">
     <div class="img-container">
         <img [src]="food.imgUrl" [alt]="food.name" />
     </div>
@@ -11,7 +11,7 @@
             <h2>{{food.description}}</h2>
         </div>
         <div class="extra-details">
-            <favorite [food]="food" [isFavorite]="food.isFavorite"></favorite>
+            <favorite (setFood)="onSetFood()" [food]="food" [isFavorite]="food.isFavorite"></favorite>
             <p>{{food.cookTime}}🕒</p>
         </div>
     </div>

@@ -1,2 +1,4 @@
-<div class="favorite-heart" [ngClass]="{'favorite': food.isFavorite}">❤</div>
+<div (click)="onSetFavorite(); $event.preventDefault()" class="favorite-heart"
+    [ngClass]="{'favorite': food.isFavorite}">❤</div>
+
 <!-- <div>{{food.isFavorite ? '❤️' : '🩶'}}</div> -->

@@ -9,6 +9,6 @@ import { FoodService } from 'src/app/services/food.service';
 export class FoodIndexComponent {
 
   private foodService = inject(FoodService)
-  foods = this.foodService.query()
+  foods$ = this.foodService.foods$
 
 }

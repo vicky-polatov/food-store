@@ -1,27 +1,26 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { map, take } from 'rxjs';
+import { map, switchMap, take } from 'rxjs';
 import { Food } from 'src/app/model/food';
+import { FoodService } from 'src/app/services/food.service';
 
 @Component({
   selector: 'food-details',
   templateUrl: './food-details.component.html',
   styleUrls: ['./food-details.component.scss']
 })
-export class FoodDetailsComponent implements OnInit {
+export class FoodDetailsComponent {
 
   route = inject(ActivatedRoute)
-  food!: Food
+  foodService = inject(FoodService)
+  food$ = this.route.data.pipe(map(data => data['food']))
 
-  ngOnInit(): void {
-    this.route.data
+  onSetFood() {
+    this.food$ = this.route.params
       .pipe(
-        map(data => data['food']),
-        take(1)
+        map(params => params['id']),
+        switchMap(id => this.foodService.getFoodById(id)),
       )
-      .subscribe((food) => {
-        this.food = food
-      })
   }
 
 }

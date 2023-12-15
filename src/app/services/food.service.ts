@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, EMPTY, catchError, from, of, retry, tap, throwError } from 'rxjs';
+import { BehaviorSubject, EMPTY, Observable, catchError, from, of, retry, tap, throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Food } from '../model/food';
 import { storageService } from './async-storage-service';
@@ -11,13 +11,13 @@ export class FoodService {
 
   constructor() { }
 
-  private _foods = new BehaviorSubject<Food[]>([])
-  public foods = this._foods.asObservable()
+  private _foods$ = new BehaviorSubject<Food[]>([])
+  public foods$ = this._foods$.asObservable()
 
   query() {
     return from(storageService.getFoods())
       .pipe(
-        tap(foods => this._foods.next(foods)),
+        tap(foods => this._foods$.next(foods)),
         retry(1),
         catchError(this._handleError)
       )
@@ -38,16 +38,40 @@ export class FoodService {
     return from(storageService.removeFood(foodId))
       .pipe(
         tap(() => {
-          const foods = this._foods.value
+          const foods = this._foods$.value
           const newFoods = foods.filter(food => food.id !== foodId)
-          this._foods.next(newFoods)
+          this._foods$.next(newFoods)
         }),
         retry(1),
         catchError(this._handleError)
       )
   }
 
+  saveFood(food: Food) {
+    return food.id ? this._editFood(food) : this._addFood(food)
+  }
+
+  private _editFood(food: Food): Observable<Food> {
+    return from(storageService.editFood(food))
+      .pipe(
+        tap((food) => {
+          const foods = this._foods$.value
+          const foodIdx = foods.findIndex(_food => _food.id === food.id)
+          foods.splice(foodIdx, 1, food)
+          this._foods$.next([...foods])
+        }),
+        retry(1),
+        catchError(this._handleError)
+      )
+  }
+
+  private _addFood(food: Food) {
+    return from([])
+
+  }
+
   private _handleError(err: HttpErrorResponse) {
     return throwError(() => err)
   }
+
 }

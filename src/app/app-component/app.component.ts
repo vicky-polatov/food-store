@@ -12,7 +12,8 @@ export class AppComponent implements OnInit {
   foodService = inject(FoodService)
 
   ngOnInit(): void {
-    this.foodService.query().pipe(take(1))
+    this.foodService.query()
+      .pipe(take(1))
+      .subscribe()
   }
-
 }

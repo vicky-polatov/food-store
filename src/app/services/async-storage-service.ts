@@ -4,7 +4,8 @@ import { Food } from '../model/food'
 export const storageService = {
     getFoods,
     getFoodById,
-    removeFood
+    removeFood,
+    editFood
 }
 
 const STORAGE_KEY = 'food'
@@ -44,6 +45,21 @@ function removeFood(foodId: string): Promise<Food> {
         const removedFood = foods.splice(foodIdx, 1)[0]
         localStorage.setItem(STORAGE_KEY, JSON.stringify(foods))
         resolve(removedFood)
+    })
+}
+
+function editFood(foodToSave: Food): Promise<Food> {
+    return new Promise((resolve, reject) => {
+        const foods = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null')
+        if (!foods || !foods.length) reject('Something went wrong...')
+
+        const foodIdx = foods.findIndex((food: Food) => food.id === foodToSave.id)
+        if (foodIdx < 0) reject('Something went wrong...')
+
+        const food = { ...foods[foodIdx], isFavorite: foodToSave.isFavorite }
+        foods.splice(foodIdx, 1, food)
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(foods))
+        resolve(food)
     })
 }
 
