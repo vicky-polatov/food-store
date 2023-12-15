@@ -1,0 +1,17 @@
+.favorite-heart {
+    color: gray;
+    cursor: pointer;
+    display: inline-block;
+
+    &:hover:not(.favorite) {
+        color: red;
+    }
+
+    &.favorite {
+        color: red;
+
+        &:hover {
+            color: gray;
+        }
+    }
+}
