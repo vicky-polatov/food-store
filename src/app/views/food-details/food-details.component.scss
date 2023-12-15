@@ -1,0 +1,61 @@
+:host {
+    display: flex;
+    height: 85vh; //later calc -header-height -footer-height
+    align-items: center;
+    justify-content: center;
+
+    .inner-page-container {
+        height: max-content;
+        display: flex;
+        gap: 5%;
+
+        img {
+            width: 500px;
+            max-width: 48%;
+            flex-basis: 50%;
+            aspect-ratio: 1/1;
+            object-fit: cover;
+            border-radius: 14px;
+        }
+
+        .food-details-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            flex-basis: 50%;
+            color: gray;
+
+            h1 {
+                color: darkred;
+            }
+
+            h2 {
+                color: rgb(87, 87, 87);
+            }
+
+            h1,
+            h2 {
+                margin: .7rem 0;
+            }
+
+            p {
+                margin: 0;
+            }
+
+            .category {
+                display: inline-block;
+                color: gray;
+                background-color: whitesmoke;
+                padding: 0 .2em;
+                border-radius: 3px;
+            }
+
+            .extra-details {
+                flex-grow: 1;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+            }
+        }
+    }
+}

@@ -1,1 +1,15 @@
-<p>food-details works!</p>
+<div class="inner-page-container">
+    <img [src]="food.imgUrl" [alt]="food.name" />
+
+    <div class="food-details-container">
+        <div class="titles">
+            <p class="category">{{food.category}}</p>
+            <h1>{{food.name}}</h1>
+            <h2>{{food.description}}</h2>
+        </div>
+        <div class="extra-details">
+            <favorite [food]="food" [isFavorite]="food.isFavorite"></favorite>
+            <p>{{food.cookTime}}🕒</p>
+        </div>
+    </div>
+</div>

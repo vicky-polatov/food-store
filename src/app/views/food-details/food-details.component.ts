@@ -1,6 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { map, take } from 'rxjs';
+import { Food } from 'src/app/model/food';
 
 @Component({
   selector: 'food-details',
@@ -10,6 +11,7 @@ import { map, take } from 'rxjs';
 export class FoodDetailsComponent implements OnInit {
 
   route = inject(ActivatedRoute)
+  food!: Food
 
   ngOnInit(): void {
     this.route.data
@@ -18,7 +20,7 @@ export class FoodDetailsComponent implements OnInit {
         take(1)
       )
       .subscribe((food) => {
-        console.log('food', food)
+        this.food = food
       })
   }
 
