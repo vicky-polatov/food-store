@@ -3,17 +3,34 @@
     height: 85vh; //later calc -header-height -footer-height
     align-items: center;
     justify-content: center;
+    position: relative;
+
+    a {
+        position: absolute;
+        display: block;
+        top: 2px;
+        left: 2px;
+
+        &:hover::before {
+            content: '⇠ ';
+        }
+    }
 
     .inner-page-container {
         height: max-content;
         display: flex;
         gap: 5%;
 
-        img {
+        .img-container {
             width: 500px;
             max-width: 48%;
             flex-basis: 50%;
-            aspect-ratio: 1/1;
+            max-height: 73vh;
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
             object-fit: cover;
             border-radius: 14px;
         }

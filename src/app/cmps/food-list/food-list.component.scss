@@ -2,5 +2,11 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 8px
+    gap: 8px;
+    height: 85vh; //later calc -header-height -footer-height
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+        width: 0;
+    }
 }
