@@ -22,7 +22,7 @@ a {
 
 .main-container {
     display: grid;
-    grid-template-columns: 30px 1fr 30px;
+    grid-template-columns: 10px 1fr 10px;
 
     &>* {
         grid-column-start: 2;
@@ -30,5 +30,11 @@ a {
 
     &>*.full {
         grid-column: 1/-1;
+    }
+}
+
+@media screen and (min-width: 530px) {
+    .main-container {
+        grid-template-columns: 30px 1fr 30px;
     }
 }
