@@ -1,0 +1,41 @@
+:host {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .search-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 50%;
+        max-width: 485px;
+        min-width: 250px;
+        position: relative;
+        padding: 10px 0;
+
+        .search-icon {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-59%);
+            color: darkred;
+        }
+
+        input {
+            padding: 16px 10px 16px 40px;
+            border: 0;
+            border-radius: 30px;
+            background-color: rgb(240, 239, 239);
+            width: 100%;
+            font-size: 1.2em;
+
+            &:focus-visible {
+                outline-color: rgb(223, 222, 222);
+            }
+        }
+
+    }
+
+}

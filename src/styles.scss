@@ -4,6 +4,11 @@
     box-sizing: border-box;
 }
 
+html,
+body {
+    height: 100%;
+}
+
 html {
     font-size: 16px;
 }
@@ -11,6 +16,7 @@ html {
 body {
     margin: 0;
     font-family: 'DM Serif Display', serif;
+    // font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 a {
