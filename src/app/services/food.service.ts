@@ -3,6 +3,7 @@ import { BehaviorSubject, EMPTY, Observable, catchError, from, of, retry, tap, t
 import { HttpErrorResponse } from '@angular/common/http';
 import { Food } from '../model/food';
 import { storageService } from './async-storage-service';
+import { Filter } from '../model/filter';
 
 @Injectable({
   providedIn: 'root'
@@ -14,10 +15,18 @@ export class FoodService {
   private _foods$ = new BehaviorSubject<Food[]>([])
   public foods$ = this._foods$.asObservable()
 
+  private _filter$ = new BehaviorSubject<Filter>(this._getDefaultFilter())
+  public filter$ = this._filter$.asObservable()
+
   query() {
     return from(storageService.getFoods())
       .pipe(
-        tap(foods => this._foods$.next(foods)),
+        tap(foods => {
+          const filterBy = this._filter$.value
+          const rgx = new RegExp(filterBy?.name || '', 'i')
+          const filteredFoods = foods.filter(food => rgx.test(food.name))
+          this._foods$.next(filteredFoods)
+        }),
         retry(1),
         catchError(this._handleError)
       )
@@ -47,6 +56,12 @@ export class FoodService {
       )
   }
 
+  setFilter(filterBy: Filter) {
+    const filter = this._filter$.value
+    this._filter$.next({ ...filter, ...filterBy })
+    this.query().subscribe()
+  }
+
   saveFood(food: Food) {
     return food.id ? this._editFood(food) : this._addFood(food)
   }
@@ -67,11 +82,14 @@ export class FoodService {
 
   private _addFood(food: Food) {
     return from([])
-
   }
 
   private _handleError(err: HttpErrorResponse) {
     return throwError(() => err)
+  }
+
+  private _getDefaultFilter() {
+    return { name: '' }
   }
 
 }
