@@ -20,15 +20,15 @@ export class FoodService {
   public filter$ = this._filter$.asObservable()
 
   query() {
-    this.loaderService.setLoader(true)
+    if (!this._foods$.value.length) this.loaderService.setLoader(true)
     return from(storageService.getFoods())
       .pipe(
         tap(foods => {
+          this.loaderService.setLoader(false)
           const filterBy = this._filter$.value
           const rgx = new RegExp(filterBy?.name || '', 'i')
           const filteredFoods = foods.filter(food => rgx.test(food.name))
           this._foods$.next(filteredFoods)
-          this.loaderService.setLoader(false)
         }),
         retry(1),
         catchError(this._handleError)
