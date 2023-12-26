@@ -13,6 +13,7 @@ import { HeaderComponent } from './cmps/header/header.component';
 import { FoodDetailsComponent } from './views/food-details/food-details.component';
 import { FavoriteComponent } from './cmps/favorite/favorite.component';
 import { FilterBoxComponent } from './cmps/filter-box/filter-box.component';
+import { LoaderComponent } from './cmps/loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { FilterBoxComponent } from './cmps/filter-box/filter-box.component';
     HeaderComponent,
     FoodDetailsComponent,
     FavoriteComponent,
-    FilterBoxComponent
+    FilterBoxComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,

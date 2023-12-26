@@ -4,13 +4,14 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Food } from '../model/food';
 import { storageService } from './async-storage-service';
 import { Filter } from '../model/filter';
+import { LoaderService } from './loader.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FoodService {
 
-  constructor() { }
+  constructor(private loaderService: LoaderService) { }
 
   private _foods$ = new BehaviorSubject<Food[]>([])
   public foods$ = this._foods$.asObservable()
@@ -19,6 +20,7 @@ export class FoodService {
   public filter$ = this._filter$.asObservable()
 
   query() {
+    this.loaderService.setLoader(true)
     return from(storageService.getFoods())
       .pipe(
         tap(foods => {
@@ -26,6 +28,7 @@ export class FoodService {
           const rgx = new RegExp(filterBy?.name || '', 'i')
           const filteredFoods = foods.filter(food => rgx.test(food.name))
           this._foods$.next(filteredFoods)
+          this.loaderService.setLoader(false)
         }),
         retry(1),
         catchError(this._handleError)
@@ -85,6 +88,7 @@ export class FoodService {
   }
 
   private _handleError(err: HttpErrorResponse) {
+    this.loaderService.setLoader(false)
     return throwError(() => err)
   }
 
