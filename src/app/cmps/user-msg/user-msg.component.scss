@@ -1,0 +1,28 @@
+.msg-container {
+    position: fixed;
+    bottom: .6rem;
+    right: .6rem;
+    background-color: rgb(162, 218, 162);
+    color: darkgreen;
+    min-width: 20rem;
+    height: 4.2rem;
+    padding: .2rem .9rem;
+    border-radius: .3rem;
+
+    h2,
+    p {
+        font-size: 1.3em;
+        margin: 0;
+        padding: 0;
+    }
+
+    &.error {
+        background-color: rgb(219, 168, 168);
+        color: darkred;
+    }
+
+    &.info {
+        background-color: rgb(255 234 179);
+        color: rgb(241 157 0);
+    }
+}

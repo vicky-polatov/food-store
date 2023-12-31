@@ -1,17 +1,22 @@
 .favorite-heart {
     color: gray;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     cursor: pointer;
-    display: inline-block;
 
     &:hover:not(.favorite) {
-        color: red;
+        background-color: rgba(235, 183, 183, 0.518);
     }
 
     &.favorite {
         color: red;
 
         &:hover {
-            color: gray;
+            background-color: rgba(210, 206, 206, 0.562);
         }
     }
 }
