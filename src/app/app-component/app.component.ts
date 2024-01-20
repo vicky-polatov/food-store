@@ -18,8 +18,8 @@ export class AppComponent implements OnInit {
       .pipe(take(1))
       .subscribe()
 
-    setTimeout(() => {
-      this.userMsgService.setUserMsg({ type: 'info', msg: 'The restaurant is now open!' })
-    }, 4000)
+    // setTimeout(() => {
+    //   this.userMsgService.setUserMsg({ type: 'info', msg: 'The restaurant is open!' })
+    // }, 4000)
   }
 }
