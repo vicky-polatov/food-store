@@ -1,0 +1,25 @@
+<li class="item-container">
+    <div class="img-container">
+        <img [src]="item.food.imgUrl" [alt]="item.food.name">
+    </div>
+    <div class="description-container">
+        <div class="description-header">
+            <p class="name">{{item.food.name}}</p>
+            <p class="description">{{item.food.description}}</p>
+        </div>
+        <p class="category">Category: {{item.food.category}}</p>
+    </div>
+    <div class="total-container">
+        <div class="total-header">
+            <p class="price">Price: {{item.price | currency}}</p>
+            <div class="quantity-container">
+                <span class="decrise">-</span>
+                <span class="quantity">{{item.quantity}}</span>
+                <span class="incrise">+</span>
+            </div>
+        </div>
+
+        <button class="remove">Remove</button>
+
+    </div>
+</li>

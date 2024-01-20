@@ -16,6 +16,8 @@ import { FilterBoxComponent } from './cmps/filter-box/filter-box.component';
 import { LoaderComponent } from './cmps/loader/loader.component';
 import { UserMsgComponent } from './cmps/user-msg/user-msg.component';
 import { CartComponent } from './views/cart/cart.component';
+import { CartListComponent } from './cmps/cart-list/cart-list.component';
+import { CartPreviewComponent } from './cmps/cart-preview/cart-preview.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import { CartComponent } from './views/cart/cart.component';
     FilterBoxComponent,
     LoaderComponent,
     UserMsgComponent,
-    CartComponent
+    CartComponent,
+    CartListComponent,
+    CartPreviewComponent
   ],
   imports: [
     BrowserModule,
