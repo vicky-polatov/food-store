@@ -15,6 +15,7 @@ import { FavoriteComponent } from './cmps/favorite/favorite.component';
 import { FilterBoxComponent } from './cmps/filter-box/filter-box.component';
 import { LoaderComponent } from './cmps/loader/loader.component';
 import { UserMsgComponent } from './cmps/user-msg/user-msg.component';
+import { CartComponent } from './views/cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { UserMsgComponent } from './cmps/user-msg/user-msg.component';
     FavoriteComponent,
     FilterBoxComponent,
     LoaderComponent,
-    UserMsgComponent
+    UserMsgComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,

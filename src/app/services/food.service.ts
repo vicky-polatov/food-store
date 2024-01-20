@@ -5,13 +5,15 @@ import { Food } from '../model/food';
 import { storageService } from './async-storage-service';
 import { Filter } from '../model/filter';
 import { LoaderService } from './loader.service';
+import { Location } from '@angular/common';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class FoodService {
 
-  constructor(private loaderService: LoaderService) { }
+  constructor(private loaderService: LoaderService, private location: Location) { }
 
   private _foods$ = new BehaviorSubject<Food[]>([])
   public foods$ = this._foods$.asObservable()
@@ -20,7 +22,9 @@ export class FoodService {
   public filter$ = this._filter$.asObservable()
 
   query() {
-    if (!this._foods$.value.length) this.loaderService.setLoader(true)
+    if (this.location.path() === '/food-store' && !this._foods$.value.length) {
+      this.loaderService.setLoader(true)
+    }
     return from(storageService.getFoods())
       .pipe(
         tap(foods => {
