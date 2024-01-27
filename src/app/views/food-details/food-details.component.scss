@@ -77,6 +77,22 @@
                 justify-content: flex-end;
             }
         }
+
+        .btn-add {
+            height: 2.4rem;
+            border: none;
+            margin-top: 5px;
+            background-color: darkred;
+            color: whitesmoke;
+            border-radius: 8px;
+            font-size: 1.4em;
+            letter-spacing: 1px;
+            font-family: inherit;
+
+            &:hover {
+                opacity: 85%;
+            }
+        }
     }
 }
 

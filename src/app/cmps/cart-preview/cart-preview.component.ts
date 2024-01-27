@@ -1,5 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
+import { take } from 'rxjs';
 import { CartItem } from 'src/app/model/cart-item';
+import { CartService } from 'src/app/services/cart.service';
+import { UserMsgService } from 'src/app/services/user-msg.service';
 
 @Component({
   selector: 'cart-preview',
@@ -8,5 +11,23 @@ import { CartItem } from 'src/app/model/cart-item';
 })
 export class CartPreviewComponent {
   @Input() item!: CartItem
+
+  private cartService = inject(CartService)
+  private userMsgService = inject(UserMsgService)
+
+  onRemoveFromCart(item: CartItem) {
+    this.cartService.removeFromCart(item)
+      .pipe(
+        take(1)
+      )
+      .subscribe({
+        next: () => {
+          this.userMsgService.setUserMsg({ type: 'success', msg: 'The dish has been removed from your cart' })
+        },
+        error: () => {
+          this.userMsgService.setUserMsg({ type: 'error', msg: 'Something went wrong.. try again later' })
+        }
+      })
+  }
 
 }

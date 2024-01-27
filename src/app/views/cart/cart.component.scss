@@ -1,0 +1,10 @@
+.totalPrice {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    &::before {
+        content: 'Total:';
+        margin-inline-end: 5px;
+    }
+}

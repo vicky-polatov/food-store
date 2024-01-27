@@ -4,6 +4,7 @@ import { Cart } from '../model/cart';
 import { cartStorageService } from './cart-storage.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Food } from '../model/food';
+import { CartItem } from '../model/cart-item';
 
 @Injectable({
   providedIn: 'root'
@@ -16,10 +17,7 @@ export class CartService {
     return from(cartStorageService.getCart())
       .pipe(
         tap(cart => this._cart$.next(cart)),
-        catchError((err: HttpErrorResponse) => {
-          console.log('Something went wrong: CartService|query', err)
-          return of(null)
-        })
+        catchError((err) => this._handleError(err, 'CartService|query'))
       )
   }
 
@@ -27,11 +25,21 @@ export class CartService {
     return from(cartStorageService.addToCart(food))
       .pipe(
         tap(cart => this._cart$.next(cart)),
-        catchError((err: HttpErrorResponse) => {
-          console.log('Something went wrong: CartService|addToCart', err)
-          return of(null)
-        })
+        catchError((err) => this._handleError(err, 'CartService|addToCart'))
       )
+  }
+
+  removeFromCart(item: CartItem) {
+    return from(cartStorageService.removeFromCart(item))
+      .pipe(
+        tap(cart => this._cart$.next(cart)),
+        catchError((err) => this._handleError(err, 'CartService|removeFromCart'))
+      )
+  }
+
+  private _handleError(err: HttpErrorResponse, errLocation: string) {
+    console.log(`Something went wrong: ${errLocation}`, err)
+    return of(null)
   }
 
 }

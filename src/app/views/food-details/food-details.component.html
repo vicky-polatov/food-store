@@ -14,5 +14,6 @@
             <favorite (setFood)="onSetFood()" [food]="food" [isFavorite]="food.isFavorite"></favorite>
             <p>{{food.cookTime}}🕒</p>
         </div>
+        <button (click)="onAddToCart(food)" class="btn-add">Add to cart</button>
     </div>
 </div>
