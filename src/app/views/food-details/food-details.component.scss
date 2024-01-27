@@ -11,8 +11,22 @@
         top: 2px;
         left: 2px;
 
+        &::before {
+            content: '⤎';
+            color: rgb(87, 87, 87);
+            display: none;
+        }
+
         &:hover::before {
-            content: '⇠ ';
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            visibility: visible;
+        }
+
+        &:hover {
+            visibility: hidden;
+            animation: 1s fade;
         }
     }
 
@@ -111,6 +125,12 @@
                 padding-top: unset;
             }
 
+        }
+
+        a {
+            &:hover::before {
+                font-size: 1.3em;
+            }
         }
 
     }

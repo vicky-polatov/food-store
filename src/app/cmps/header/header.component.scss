@@ -1,0 +1,18 @@
+:host {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: darkred;
+    color: whitesmoke;
+
+    .logo {
+        font-size: 1.4em;
+    }
+
+    .nav a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
