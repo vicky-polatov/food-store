@@ -1,12 +1,14 @@
-.list-container {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 8px;
-    height: 85vh; //later calc -header-height -footer-height
+:host {
     overflow-y: auto;
 
     &::-webkit-scrollbar {
         width: 0;
+    }
+
+    .list-container {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 8px;
     }
 }

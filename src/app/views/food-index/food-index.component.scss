@@ -1,0 +1,5 @@
+.main-food-container {
+    height: calc(100vh - 100px); //later calc -header-height -footer-height
+    display: grid;
+    grid-template-rows: 4.4rem 1fr;
+}

@@ -1,10 +1,20 @@
-.totalPrice {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
+:host {
 
-    &::before {
-        content: 'Total:';
-        margin-inline-end: 5px;
+    height: calc(100vh - 100px); //later calc -header-height -footer-height
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+        width: 0;
+    }
+
+    .totalPrice {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+
+        &::before {
+            content: 'Total:';
+            margin-inline-end: 5px;
+        }
     }
 }
