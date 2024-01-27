@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, EMPTY, Observable, catchError, from, of, retry, tap, throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Food } from '../model/food';
-import { storageService } from './async-storage-service';
+import { foodStorageService } from './async-food-storage-service';
 import { Filter } from '../model/filter';
 import { LoaderService } from './loader.service';
 import { Location } from '@angular/common';
@@ -25,7 +25,7 @@ export class FoodService {
     if (this.location.path() === '/food-store' && !this._foods$.value.length) {
       this.loaderService.setLoader(true)
     }
-    return from(storageService.getFoods())
+    return from(foodStorageService.getFoods())
       .pipe(
         tap(foods => {
           this.loaderService.setLoader(false)
@@ -41,7 +41,7 @@ export class FoodService {
   }
 
   getFoodById(foodId: string) {
-    return from(storageService.getFoodById(foodId))
+    return from(foodStorageService.getFoodById(foodId))
       .pipe(
         catchError((err: HttpErrorResponse) => {
           console.log('Something went wrong: FoodService|getFoodById', err)
@@ -51,7 +51,7 @@ export class FoodService {
   }
 
   removeFood(foodId: string) {
-    return from(storageService.removeFood(foodId))
+    return from(foodStorageService.removeFood(foodId))
       .pipe(
         tap(() => {
           const foods = this._foods$.value
@@ -74,7 +74,7 @@ export class FoodService {
   }
 
   private _editFood(food: Food): Observable<Food> {
-    return from(storageService.editFood(food))
+    return from(foodStorageService.editFood(food))
       .pipe(
         tap((food) => {
           const foods = this._foods$.value

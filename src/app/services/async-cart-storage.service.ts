@@ -1,6 +1,7 @@
 import { Cart } from "../model/cart"
 import { CartItem } from "../model/cart-item"
 import { Food } from "../model/food"
+import { storageService } from "./storage-service"
 
 export const cartStorageService = {
   getCart,
@@ -12,12 +13,12 @@ export const cartStorageService = {
 const STORAGE_KEY = 'cart'
 
 function getCart(): Promise<Cart> {
-  const cart = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null') || getDefaultCart()
+  const cart = storageService.getFromStorage(STORAGE_KEY) || getDefaultCart()
   return new Promise((resolve) => resolve(cart))
 }
 
 function addToCart(food: Food): Promise<Cart> {
-  const cart = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null') || getDefaultCart()
+  const cart = storageService.getFromStorage(STORAGE_KEY) || getDefaultCart()
 
   let itemToAdd = cart.items?.find((item: CartItem) => item.food.id === food.id)
   if (itemToAdd) {
@@ -34,21 +35,21 @@ function addToCart(food: Food): Promise<Cart> {
   }
 
   cart.totalPrice += food.price
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(cart))
+  storageService.saveToStorage(STORAGE_KEY, cart)
 
   return new Promise(resolve => resolve(cart))
 }
 
 function removeFromCart(cartItem: CartItem): Promise<Cart> {
   return new Promise((resolve, reject) => {
-    const cart: Cart = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null') || getDefaultCart()
+    const cart = storageService.getFromStorage(STORAGE_KEY) || getDefaultCart()
     const itemIdx = cart.items.findIndex((item: CartItem) => item.id === cartItem.id)
-    if (itemIdx === -1) return reject('The dish was not found in the cart')
+    if (itemIdx < 0) return reject('The dish was not found in the cart')
 
     cart.totalPrice -= cartItem.food.price * cartItem.quantity
     cart.items.splice(itemIdx, 1)
 
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(cart))
+    storageService.saveToStorage(STORAGE_KEY, cart)
     return resolve(cart)
   })
 }

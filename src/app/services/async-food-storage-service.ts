@@ -1,7 +1,8 @@
 import { Food } from '../model/food'
+import { storageService } from './storage-service'
 
 
-export const storageService = {
+export const foodStorageService = {
     getFoods,
     getFoodById,
     removeFood,
@@ -10,12 +11,11 @@ export const storageService = {
 
 const STORAGE_KEY = 'food'
 
-
 function getFoods(delay = 500): Promise<Food[]> {
-    let foods = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null')
+    let foods = storageService.getFromStorage(STORAGE_KEY)
     if (!foods || !foods.length) {
         foods = _createFoods()
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(foods))
+        storageService.saveToStorage(STORAGE_KEY, foods)
     }
     return new Promise((resolve) => {
         setTimeout(resolve, delay, foods)
@@ -24,7 +24,7 @@ function getFoods(delay = 500): Promise<Food[]> {
 
 function getFoodById(foodId: string): Promise<Food> {
     return new Promise((resolve, reject) => {
-        const foods = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null')
+        const foods = storageService.getFromStorage(STORAGE_KEY)
         if (!foods || !foods.length) reject('No foods')
 
         const food = foods.find((food: Food) => food.id === foodId)
@@ -36,21 +36,21 @@ function getFoodById(foodId: string): Promise<Food> {
 
 function removeFood(foodId: string): Promise<Food> {
     return new Promise((resolve, reject) => {
-        const foods: Food[] = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null')
+        const foods: Food[] = storageService.getFromStorage(STORAGE_KEY)
         if (!foods || !foods.length) reject('Something went wrong')
 
         const foodIdx = foods.findIndex((food: Food) => food.id === foodId)
         if (foodIdx < 0) reject('Something went wrong')
 
         const removedFood = foods.splice(foodIdx, 1)[0]
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(foods))
+        storageService.saveToStorage(STORAGE_KEY, foods)
         resolve(removedFood)
     })
 }
 
 function editFood(foodToSave: Food): Promise<Food> {
     return new Promise((resolve, reject) => {
-        const foods = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null')
+        const foods = storageService.getFromStorage(STORAGE_KEY)
         if (!foods || !foods.length) reject('Something went wrong...')
 
         const foodIdx = foods.findIndex((food: Food) => food.id === foodToSave.id)
@@ -58,7 +58,7 @@ function editFood(foodToSave: Food): Promise<Food> {
 
         const food = { ...foods[foodIdx], isFavorite: foodToSave.isFavorite }
         foods.splice(foodIdx, 1, food)
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(foods))
+        storageService.saveToStorage(STORAGE_KEY, foods)
         resolve(food)
     })
 }
