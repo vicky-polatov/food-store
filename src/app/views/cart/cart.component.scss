@@ -12,9 +12,17 @@
         justify-content: flex-end;
         align-items: center;
 
-        &::before {
-            content: 'Total:';
-            margin-inline-end: 5px;
+        span {
+            display: flex;
+            gap: 5px;
+            justify-content: space-between;
+            width: 7.18rem;
+
+            &::before {
+                content: 'Total:';
+                margin-inline-end: 5px;
+            }
         }
+
     }
 }

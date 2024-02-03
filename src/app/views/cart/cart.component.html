@@ -1,5 +1,4 @@
 <section *ngIf="cart$ | async as cart">
     <cart-list [items]="cart.items"></cart-list>
-
-    <p class="totalPrice">{{cart.totalPrice | currency}}</p>
+    <div class="totalPrice"><span>{{cart.totalPrice | currency}}</span></div>
 </section>
