@@ -1,7 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FoodService } from '../services/food.service';
 import { take } from 'rxjs';
-import { UserMsgService } from '../services/user-msg.service';
+import { UserMsgService } from '../services/user.msg.service';
 
 @Component({
   selector: 'app-root',

@@ -2,7 +2,7 @@ import { Component, Input, inject } from '@angular/core';
 import { take } from 'rxjs';
 import { CartItem } from 'src/app/model/cart-item';
 import { CartService } from 'src/app/services/cart.service';
-import { UserMsgService } from 'src/app/services/user-msg.service';
+import { UserMsgService } from 'src/app/services/user.msg.service';
 
 @Component({
   selector: 'cart-preview',

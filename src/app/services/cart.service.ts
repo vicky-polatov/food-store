@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, from, of, tap, throwError } from 'rxjs';
 import { Cart } from '../model/cart';
-import { cartStorageService } from './async-cart-storage.service';
+import { cartStorageService } from './async.cart.storage.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Food } from '../model/food';
 import { CartItem } from '../model/cart-item';

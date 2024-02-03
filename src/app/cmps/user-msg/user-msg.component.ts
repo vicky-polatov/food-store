@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { UserMsg } from 'src/app/model/user-msg';
-import { UserMsgService } from 'src/app/services/user-msg.service';
+import { UserMsgService } from 'src/app/services/user.msg.service';
 
 @Component({
   selector: 'user-msg',

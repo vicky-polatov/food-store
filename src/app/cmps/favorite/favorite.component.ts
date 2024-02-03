@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { catchError, take } from 'rxjs';
 import { Food } from 'src/app/model/food';
 import { FoodService } from 'src/app/services/food.service';
-import { UserMsgService } from 'src/app/services/user-msg.service';
+import { UserMsgService } from 'src/app/services/user.msg.service';
 
 @Component({
   selector: 'favorite',

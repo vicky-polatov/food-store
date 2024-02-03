@@ -5,7 +5,7 @@ import { Food } from 'src/app/model/food';
 import { CartService } from 'src/app/services/cart.service';
 import { FoodService } from 'src/app/services/food.service';
 import { LoaderService } from 'src/app/services/loader.service';
-import { UserMsgService } from 'src/app/services/user-msg.service';
+import { UserMsgService } from 'src/app/services/user.msg.service';
 
 @Component({
   selector: 'food-details',

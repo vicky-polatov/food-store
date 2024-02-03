@@ -1,7 +1,7 @@
 import { Cart } from "../model/cart"
 import { CartItem } from "../model/cart-item"
 import { Food } from "../model/food"
-import { storageService } from "./storage-service"
+import { storageService } from "./storage.service"
 
 export const cartStorageService = {
   getCart,

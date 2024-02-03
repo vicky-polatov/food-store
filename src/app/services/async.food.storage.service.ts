@@ -1,5 +1,5 @@
 import { Food } from '../model/food'
-import { storageService } from './storage-service'
+import { storageService } from './storage.service'
 
 
 export const foodStorageService = {

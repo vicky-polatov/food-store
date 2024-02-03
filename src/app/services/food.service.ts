@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, EMPTY, Observable, catchError, from, of, retry, tap, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, from, of, retry, tap, throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Food } from '../model/food';
-import { foodStorageService } from './async-food-storage-service';
+import { foodStorageService } from './async.food.storage.service';
 import { Filter } from '../model/filter';
 import { LoaderService } from './loader.service';
 import { Location } from '@angular/common';
