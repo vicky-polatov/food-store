@@ -12,12 +12,13 @@ export const foodStorageService = {
 const STORAGE_KEY = 'food'
 
 function getFoods(delay = 500): Promise<Food[]> {
-    let foods = storageService.getFromStorage(STORAGE_KEY)
-    if (!foods || !foods.length) {
-        foods = _createFoods()
-        storageService.saveToStorage(STORAGE_KEY, foods)
-    }
     return new Promise((resolve) => {
+        let foods = storageService.getFromStorage(STORAGE_KEY)
+        if (!foods || !foods.length) {
+            foods = _createFoods()
+            storageService.saveToStorage(STORAGE_KEY, foods)
+        }
+
         setTimeout(resolve, delay, foods)
     })
 }

@@ -13,11 +13,14 @@ export const cartStorageService = {
 const STORAGE_KEY = 'cart'
 
 function getCart(): Promise<Cart> {
+  return new Promise((resolve) => {
   const cart = storageService.getFromStorage(STORAGE_KEY) || getDefaultCart()
-  return new Promise((resolve) => resolve(cart))
+    resolve(cart)
+  })
 }
 
 function addToCart(food: Food): Promise<Cart> {
+  return new Promise(resolve => {
   const cart = storageService.getFromStorage(STORAGE_KEY) || getDefaultCart()
 
   let itemToAdd = cart.items?.find((item: CartItem) => item.food.id === food.id)
@@ -36,8 +39,8 @@ function addToCart(food: Food): Promise<Cart> {
 
   cart.totalPrice += food.price
   storageService.saveToStorage(STORAGE_KEY, cart)
-
-  return new Promise(resolve => resolve(cart))
+    resolve(cart)
+  })
 }
 
 function removeFromCart(cartItem: CartItem): Promise<Cart> {
@@ -50,9 +53,10 @@ function removeFromCart(cartItem: CartItem): Promise<Cart> {
     cart.items.splice(itemIdx, 1)
 
     storageService.saveToStorage(STORAGE_KEY, cart)
-    return resolve(cart)
+    resolve(cart)
   })
 }
+
 
 function getDefaultCart(): Cart {
   return {
