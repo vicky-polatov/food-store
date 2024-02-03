@@ -30,4 +30,13 @@ export class CartPreviewComponent {
       })
   }
 
+  onSetQuantity(item: CartItem, diff: number) {
+    this.cartService.setQuantity(item, diff)
+      .pipe(take(1))
+      .subscribe({
+        error: () => {
+          this.userMsgService.setUserMsg({ type: 'error', msg: 'Something went wrong.. try again later' })
+        }
+      })
+  }
 }

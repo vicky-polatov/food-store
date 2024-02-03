@@ -13,9 +13,9 @@
         <div class="total-header">
             <p class="price">{{item.price | currency}}</p>
             <div class="quantity-container">
-                <span class="decrise">-</span>
+                <span (click)="onSetQuantity(item, -1)" class="decrise">-</span>
                 <span class="quantity">{{item.quantity}}</span>
-                <span class="incrise">+</span>
+                <span (click)="onSetQuantity(item, 1)" class="incrise">+</span>
             </div>
         </div>
 

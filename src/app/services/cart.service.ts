@@ -37,6 +37,14 @@ export class CartService {
       )
   }
 
+  setQuantity(item: CartItem, diff: number) {
+    return from(cartStorageService.setQuantity(item, diff))
+      .pipe(
+        tap(cart => this._cart$.next(cart)),
+        catchError((err: HttpErrorResponse) => this._handleError(err, 'CartService|setQuantity'))
+      )
+  }
+
   private _handleError(err: HttpErrorResponse, errLocation: string) {
     console.log(`Something went wrong: ${errLocation}`, err)
     return of(null)
