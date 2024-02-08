@@ -1,8 +1,7 @@
-import { Component, Input, inject } from '@angular/core';
-import { take } from 'rxjs';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CartItem } from 'src/app/model/cart-item';
-import { CartService } from 'src/app/services/cart.service';
-import { UserMsgService } from 'src/app/services/user.msg.service';
+
+type QuantityToSet = { item: CartItem, diff: number }
 
 @Component({
   selector: 'cart-preview',
@@ -11,32 +10,14 @@ import { UserMsgService } from 'src/app/services/user.msg.service';
 })
 export class CartPreviewComponent {
   @Input() item!: CartItem
-
-  private cartService = inject(CartService)
-  private userMsgService = inject(UserMsgService)
+  @Output() removeFromCart = new EventEmitter<CartItem>()
+  @Output() setQuantity = new EventEmitter<QuantityToSet>()
 
   onRemoveFromCart(item: CartItem) {
-    this.cartService.removeFromCart(item)
-      .pipe(
-        take(1)
-      )
-      .subscribe({
-        next: () => {
-          this.userMsgService.setUserMsg({ type: 'success', msg: 'The dish has been removed from your cart' })
-        },
-        error: () => {
-          this.userMsgService.setUserMsg({ type: 'error', msg: 'Something went wrong.. try again later' })
-        }
-      })
+    this.removeFromCart.emit(item)
   }
 
   onSetQuantity(item: CartItem, diff: number) {
-    this.cartService.setQuantity(item, diff)
-      .pipe(take(1))
-      .subscribe({
-        error: () => {
-          this.userMsgService.setUserMsg({ type: 'error', msg: 'Something went wrong.. try again later' })
-        }
-      })
+    this.setQuantity.emit({ item, diff })
   }
 }

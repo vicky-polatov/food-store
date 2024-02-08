@@ -1,3 +1,4 @@
 <ul>
-    <cart-preview *ngFor="let item of items" [item]="item"></cart-preview>
+    <cart-preview (setQuantity)="onSetQuantity($event)" (removeFromCart)="onRemoveFromCart($event)"
+        *ngFor="let item of items" [item]="item"></cart-preview>
 </ul>

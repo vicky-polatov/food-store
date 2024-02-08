@@ -1,4 +1,5 @@
 <section *ngIf="cart$ | async as cart">
-    <cart-list [items]="cart.items"></cart-list>
+    <cart-list (setQuantity)="onSetQuantity($event)" (removeFromCart)="removeFromCart($event)"
+        [items]="cart.items"></cart-list>
     <div class="totalPrice"><span>{{cart.totalPrice | currency}}</span></div>
 </section>
