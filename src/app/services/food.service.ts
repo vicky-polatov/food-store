@@ -12,7 +12,6 @@ import { Location } from '@angular/common';
   providedIn: 'root'
 })
 export class FoodService {
-
   constructor(private loaderService: LoaderService, private location: Location) { }
 
   private _foods$ = new BehaviorSubject<Food[]>([])
@@ -45,7 +44,7 @@ export class FoodService {
       .pipe(
         catchError((err: HttpErrorResponse) => {
           console.log('Something went wrong: FoodService|getFoodById', err)
-          return of(null) // return EMPTY
+          return of(null)
         })
       )
   }
@@ -99,5 +98,4 @@ export class FoodService {
   private _getDefaultFilter() {
     return { name: '' }
   }
-
 }

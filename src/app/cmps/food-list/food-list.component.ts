@@ -8,5 +8,4 @@ import { Food } from 'src/app/model/food';
 })
 export class FoodListComponent {
   @Input() foods!: Food[]
-
 }

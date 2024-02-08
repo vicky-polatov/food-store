@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, from, of, tap, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, from, of, tap } from 'rxjs';
 import { Cart } from '../model/cart';
 import { cartStorageService } from './async.cart.storage.service';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -49,5 +49,4 @@ export class CartService {
     console.log(`Something went wrong: ${errLocation}`, err)
     return of(null)
   }
-
 }

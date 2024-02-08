@@ -9,7 +9,6 @@ import { FoodService } from 'src/app/services/food.service';
   styleUrls: ['./filter-box.component.scss']
 })
 export class FilterBoxComponent implements OnInit, OnDestroy {
-
   constructor(private foodService: FoodService) { }
 
   foodFilter!: Filter
@@ -43,5 +42,4 @@ export class FilterBoxComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroySubject$.next(null)
   }
-
 }

@@ -9,5 +9,4 @@ import { LoaderService } from 'src/app/services/loader.service';
 })
 export class LoaderComponent {
   isLoading$: Observable<boolean> = inject(LoaderService).isLoading$
-
 }

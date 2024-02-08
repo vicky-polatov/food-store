@@ -9,7 +9,6 @@ import { UserMsgService } from 'src/app/services/user.msg.service';
   styleUrls: ['./user-msg.component.scss'],
 })
 export class UserMsgComponent implements OnInit, OnDestroy {
-
   constructor(private userMsgService: UserMsgService) { }
 
   userMsg: UserMsg | null = null
@@ -25,5 +24,4 @@ export class UserMsgComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscription.unsubscribe()
   }
-
 }

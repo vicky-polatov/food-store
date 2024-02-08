@@ -7,8 +7,6 @@ import { FoodService } from 'src/app/services/food.service';
   styleUrls: ['./food-index.component.scss']
 })
 export class FoodIndexComponent {
-
   private foodService = inject(FoodService)
   foods$ = this.foodService.foods$
-
 }

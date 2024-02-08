@@ -6,7 +6,6 @@ import { UserMsg } from '../model/user-msg';
   providedIn: 'root'
 })
 export class UserMsgService {
-
   private _userMsg$ = new BehaviorSubject<UserMsg | null>(null)
   public userMsg$ = this._userMsg$.asObservable()
 
@@ -18,5 +17,4 @@ export class UserMsgService {
     if (this.timeOutId) clearTimeout(this.timeOutId)
     this.timeOutId = setTimeout(() => this._userMsg$.next(null), delay)
   }
-
 }

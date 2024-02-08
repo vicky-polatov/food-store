@@ -51,5 +51,4 @@ export class FoodDetailsComponent implements OnInit {
         }
       })
   }
-
 }

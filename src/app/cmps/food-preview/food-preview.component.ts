@@ -8,5 +8,4 @@ import { Food } from 'src/app/model/food';
 })
 export class FoodPreviewComponent {
   @Input() food!: Food
-
 }

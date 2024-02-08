@@ -9,17 +9,11 @@ import { UserMsgService } from '../services/user.msg.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-
   foodService = inject(FoodService)
-  userMsgService = inject(UserMsgService)
 
   ngOnInit(): void {
     this.foodService.query()
       .pipe(take(1))
       .subscribe()
-
-    // setTimeout(() => {
-    //   this.userMsgService.setUserMsg({ type: 'info', msg: 'The restaurant is open!' })
-    // }, 4000)
   }
 }
